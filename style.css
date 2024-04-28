@@ -5,35 +5,36 @@
 
 body,
 html {
+    font-family: 'rag';
     height: 100%;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
 }
 
 h2 {
-    position: relative;
-    z-index: 100;
-    font-family: 'rag';
     margin-block: 0.1em;
     font-weight: normal;
 }
 
+#begin,
+#dig {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
 #begin {
-    position: relative;
+    top: 50%;
+    left: 50%;
     text-align: center;
 }
 
 #dig {
-    position: absolute;
     top: 60%;
     left: 35%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
     max-width: 20vw;
     opacity: 0;
     transition: opacity 0.5s ease;
+    z-index: -1;
 }
 
 #begin:hover {
@@ -42,4 +43,32 @@ h2 {
 
 #begin:hover+#dig {
     opacity: 1;
+}
+
+#story {
+    position: absolute;
+    max-width: 25vw;
+    left: 12vw;
+    top: 20vh;
+    visibility: hidden;
+}
+
+#photos {
+    position: absolute;
+    right: 0;
+    bottom: 5vh;
+    width: 45svw;
+    height: 50vh;
+    visibility: hidden;
+}
+
+.tam {
+    position: absolute;
+    max-width: 35vw;
+    max-height: 35vh;
+    transition: transform 0.3s ease;
+}
+
+.tam:hover {
+    transform: translateY(-50px);
 }
