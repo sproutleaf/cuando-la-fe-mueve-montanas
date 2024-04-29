@@ -12,7 +12,7 @@ const imageMap = {
     "victory.jpg": '"Victory belongs to us forever!"',
     "people-alone.jpg": '"The people and the people alone are the motive of world history"',
     "renda.jpg": '"Teachers and workers at Renmin University join the petition"',
-    "dance.jpg": "A young couple dancing amongst protesters at Tian'anmen Square",
+    "hunger.jpeg": '"On Hunger Strike"',
     "teacher.jpg": 'From a teacher: "if you want to kill the students, kill me first"',
     "square.webp": 'Each flag represents a department from a university in Beijing'
 };
