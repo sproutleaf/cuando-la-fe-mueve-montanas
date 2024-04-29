@@ -53,22 +53,37 @@ h2 {
     visibility: hidden;
 }
 
-#photos {
+#stack {
     position: absolute;
     right: 0;
     bottom: 5vh;
     width: 45svw;
     height: 50vh;
     visibility: hidden;
+    pointer-events: none;
+}
+
+#caption {
+    position: absolute;
+    bottom: 5vh;
+    width: 90%;
+    margin: auto;
+    text-align: right;
 }
 
 .tam {
     position: absolute;
     max-width: 35vw;
     max-height: 35vh;
-    transition: transform 0.3s ease;
+    pointer-events: all;
+    cursor: crosshair;
 }
 
-.tam:hover {
-    transform: translateY(-50px);
+#now {
+    min-height: 50vh;
+    position: absolute;
+    max-width: 25vw;
+    left: 12vw;
+    bottom: 20vh;
+    visibility: hidden;
 }
