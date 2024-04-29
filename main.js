@@ -5,6 +5,8 @@ const p1 = ["My grandpa, upon learning my dad's decision, took an overnight bus 
 
 const p2 = ["He asked me if things are serious,", " if I showed up.<br>", " I said yes, and told him the protesters at NYU have been principled, ", "peaceful yet determined. And elsewhere—", "comrades are creative, ", "fearless, ", "unrelenting."];
 
+const p3 = [" or even, outright censored... ", "they will always be worthwhile, ", "and reveberate through time, ", "geographies, ", "people. <br><br>", "To my student years.<br>", "To always showing up for our interconnected struggles.<br>", "To the people of Palestine, ", "and freedom fighters of the world."];
+
 const imageMap = {
     "regret.jpg": '"We only regret that we each have but one life to lose for our people"',
     "victory.jpg": '"Victory belongs to us forever!"',
@@ -40,9 +42,15 @@ function randomNum(min, max) {
 function story(arr, id) {
     $(document).off('click', story);
 
+    if (cc === arr.length - 2) {
+        if (scene < 2) addPhotos(...Object.values(settings[scene++]));
+        else if (scene === 2) {
+            window.open(`readings.html`, '_blank', `popup,location,status,scrollbars,resizable,alwaysRaised,width=1000,height=450,top=100,left=200`);
+        }
+    }
+
     if (cc === arr.length) {
         cc = 0;
-        addPhotos(...Object.values(settings[scene++]));
     } else {
         let div = $(`#${id}`);
         let text = $('<span>').hide().html(arr[cc++]);
@@ -136,8 +144,26 @@ $(document).ready(function () {
                     $(this).remove();
                     $("#vimeo").css('visibility', 'visible').hide().fadeIn(fadeSpeed, () => player.play());
                     $("#background").css('visibility', 'visible').hide().fadeIn(fadeSpeed);
+                    setTimeout(function () {
+                        $("#shovel").css({
+                            'visibility': 'visible',
+                            'pointer-events': 'all'
+                        }).hide().fadeIn(fadeSpeed);
+                    }, 64000);
                 });
             }
         });
+    });
+
+    $(document).on('click', '#shovel', function () {
+        let divs = ['#shovel', '#vimeo', '#background'];
+        for (const div of divs) {
+            $(div).fadeOut(fadeSpeed, function () {
+                $(this).remove();
+            });
+        }
+        $('#conclusion').css('visibility', 'visible').hide().fadeIn(fadeSpeed);
+        $('#olive').css('visibility', 'visible').hide().fadeIn(fadeSpeed);
+        $(document).one('click', () => story(p3, 'conclusion'));
     });
 });

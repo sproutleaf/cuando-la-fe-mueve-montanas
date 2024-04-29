@@ -24,7 +24,8 @@ h2 {
 }
 
 #begin,
-#dig {
+#dig,
+#all {
     position: absolute;
     transform: translate(-50%, -50%);
 }
@@ -116,4 +117,34 @@ h2 {
 
 #background {
     top: 80%;
+}
+
+#shovel {
+    position: absolute;
+    right: 10vw;
+    bottom: 10vh;
+    pointer-events: none;
+    visibility: hidden;
+    cursor: grab;
+}
+
+#unicode {
+    max-width: 36px;
+    max-height: 36px;
+}
+
+#conclusion {
+    top: 50%;
+    min-height: 35vh;
+    max-width: 30vw;
+    mix-blend-mode: overlay;
+}
+
+#olive {
+    visibility: hidden;
+    max-width: 30vw;
+    position: absolute;
+    bottom: 20vh;
+    right: 15vw;
+    z-index: -1;
 }
