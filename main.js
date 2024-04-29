@@ -1,9 +1,9 @@
-const fadeSpeed = 100;
+const fadeSpeed = 1500;
 let cc = 0;
 
 const p1 = ["My grandpa, upon learning my dad's decision, took an overnight bus and surprised him at his dorm; ", "asked him not to go.<br><br>", "The ticket sat voided in his drawer. ", "600 miles away, thousands of students and educators settled in encampments, ", "began a month-long mass hunger strike."];
 
-const p2 = ["He asked me if things are serious,", " if I showed up.<br>", " I said yes, and told him the students at NYU have been principled, ", "peaceful yet determined. And elsewhere—", "students are creative, ", "fearless, ", "unrelenting."];
+const p2 = ["He asked me if things are serious,", " if I showed up.<br>", " I said yes, and told him the protesters at NYU have been principled, ", "peaceful yet determined. And elsewhere—", "comrades are creative, ", "fearless, ", "unrelenting."];
 
 const imageMap = {
     "regret.jpg": '"We only regret that we each have but one life to lose for our people"',
@@ -119,9 +119,12 @@ $(document).ready(function () {
         });
     });
 
-    let player = new Vimeo.Player('vimeo');
+    let player = new Vimeo.Player('vimeo', {
+        // Hides the progress bar while the video is playing
+        controls: false
+    });
     player.on('loaded', function () {
-        player.setCurrentTime(512);  // Start the video at 512 seconds
+        player.setCurrentTime(512);
     });
 
     $(document).on('click', '.college', function () {
