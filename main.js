@@ -1,9 +1,9 @@
-const fadeSpeed = 1500;
+const fadeSpeed = 100;
 let cc = 0;
 
-const p1 = ["My grandpa, upon learning my dad's decision, took an overnight bus and surprised him at his dorm; ", "asked him not to go.<br><br>", "The ticket sat voided in his drawer. ", "600 miles away, thousands of students and educators settled in encampments, ", "began a mass hunger strike."];
+const p1 = ["My grandpa, upon learning my dad's decision, took an overnight bus and surprised him at his dorm; ", "asked him not to go.<br><br>", "The ticket sat voided in his drawer. ", "600 miles away, thousands of students and educators settled in encampments, ", "began a month-long mass hunger strike."];
 
-const p2 = ["He asked me if things are serious,", " if I showed up.", " I told him the students at NYU have been principled, ", "peaceful yet determined. And elsewhere—", "students are creative, ", "fearless, ", "unrelenting."];
+const p2 = ["He asked me if things are serious,", " if I showed up.<br>", " I said yes, and told him the students at NYU have been principled, ", "peaceful yet determined. And elsewhere—", "students are creative, ", "fearless, ", "unrelenting."];
 
 const imageMap = {
     "regret.jpg": '"We only regret that we each have but one life to lose for our people"',
@@ -15,6 +15,23 @@ const imageMap = {
     "square.webp": 'Each flag represents a department from a university in Beijing'
 };
 
+const palestineMap = {
+    "father.PNG": "Father supporting daughter at the USC encampment, with his father",
+    "library.jpg": "The Refaat Alareer Memorial Library at Yale encampment",
+    "cal.JPG": "At Cal Poly Humboldt, students completely barricaded the building from cops",
+    "columbia.jpg": "Columbia faculty walkout in solidarity with students",
+    "nyufaculty.jpg": "NYU faculty forming a chain to protect students at the encampment",
+    "sprinkler.jpg": "15L water bottle on a sprinkler—universities turned on sprinklers to disrupt student protests",
+    "mit.jpg": "every tent at MIT encampment is named after a city in Palestine",
+    "second.jpg": "The second NYU encampment at 181 Mercer, after the first encampment was removed and wall constructed outside of Stern"
+}
+
+let scene = 0;
+let settings = [
+    { id: 'stack', photoId: 'photos', map: imageMap, cssClass: 'tam' },
+    { id: 'album', photoId: 'photos2', map: palestineMap, cssClass: 'college' }
+];
+
 function randomNum(min, max) {
     let range = max - min + 1;
     return Math.floor(Math.random() * range) + min;
@@ -25,7 +42,7 @@ function story(arr, id) {
 
     if (cc === arr.length) {
         cc = 0;
-        addPhotos();
+        addPhotos(...Object.values(settings[scene++]));
     } else {
         let div = $(`#${id}`);
         let text = $('<span>').hide().html(arr[cc++]);
@@ -36,27 +53,27 @@ function story(arr, id) {
     }
 }
 
-function addPhotos() {
-    $("#stack").css('visibility', 'visible');
-    const paths = Object.keys(imageMap);
+function addPhotos(id, photoId, map, cssClass) {
+    $(`#${id}`).css('visibility', 'visible');
+    const paths = Object.keys(map);
 
     function fadeInImage(i, paths) {
         if (i >= paths.length) return;
 
         const path = `photos/${paths[i]}`;
-        const altText = imageMap[paths[i]];
+        const altText = map[paths[i]];
         $('<img>', { src: path, alt: altText }).on('load', function () {
             const position = this.height > this.width ?
                 { left: randomNum(100, 300), top: randomNum(0, 50) } :
                 { left: randomNum(0, 50), top: randomNum(0, 50) };
-            $(this).addClass('tam').css({
+            $(this).addClass(cssClass).css({
                 display: 'none',
                 position: 'absolute',
                 left: `${position.left}px`,
                 top: `${position.top}px`,
                 transform: `rotate(${randomNum(-10, 10)}deg)`,
                 boxShadow: '3px 3px 2px 0px rgba(0,0,0,0.1)'
-            }).appendTo('#photos').fadeIn(fadeSpeed, () => fadeInImage(i + 1, paths));
+            }).appendTo(`#${photoId}`).fadeIn(fadeSpeed, () => fadeInImage(i + 1, paths));
         });
     }
 
@@ -64,6 +81,12 @@ function addPhotos() {
 }
 
 $(document).ready(function () {
+    $.get('background.txt', function (data) {
+        $('#background').html(data);
+    }).fail(function (error) {
+        console.error('Error loading the text file:', error);
+    });
+
     $("#begin").off("click").one("click", () => {
         $("#dig").fadeOut(fadeSpeed);
         $("#begin").fadeOut(fadeSpeed, () => {
@@ -74,9 +97,10 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('mouseenter mouseleave', '.tam', function (event) {
+    $(document).on('mouseenter mouseleave', '.tam, .college', function (event) {
         let altText = event.type === 'mouseenter' ? $(this).attr('alt') : '';
-        $('#caption').hide().text(altText).fadeIn(fadeSpeed / 2);
+        let id = $(this).hasClass('tam') ? '#caption' : '#caption2';
+        $(id).hide().text(altText).fadeIn(fadeSpeed / 2);
         let top = parseInt($(this).css('top'), 10);
         $(this).css('top', `${top + (event.type === 'mouseenter' ? -10 : 10)}px`);
     });
@@ -90,6 +114,25 @@ $(document).ready(function () {
                     $(this).remove();
                     $("#now").css('visibility', 'visible').hide().fadeIn(fadeSpeed);
                     $(document).one('click', () => story(p2, 'now'));
+                });
+            }
+        });
+    });
+
+    let player = new Vimeo.Player('vimeo');
+    player.on('loaded', function () {
+        player.setCurrentTime(512);  // Start the video at 512 seconds
+    });
+
+    $(document).on('click', '.college', function () {
+        $(this).fadeOut(fadeSpeed, function () {
+            $(this).remove();
+            if ($('.college').length === 0) {
+                $('#now').fadeOut(fadeSpeed);
+                $('#album').fadeOut(fadeSpeed, function () {
+                    $(this).remove();
+                    $("#vimeo").css('visibility', 'visible').hide().fadeIn(fadeSpeed, () => player.play());
+                    $("#background").css('visibility', 'visible').hide().fadeIn(fadeSpeed);
                 });
             }
         });

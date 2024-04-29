@@ -9,12 +9,12 @@
 </head>
 
 <body>
-    <div id="begin">
+    <div id="begin" class="centered-hidden">
         <h2>Cuando La Fe Mueve Montañas</h2>
         <hr width="100%" size="3" color="black">
         <h2>When Faith Moves Mountains</h2>
     </div>
-    <img id="dig" src="photos/dig.jpeg">
+    <img id="dig" class="centered-hidden" src="photos/dig.jpeg">
 
     <!-- first part -->
     <div id="story">In May of 1989, my dad, then a sophomore at a university in Nanjing, bought a train ticket to
@@ -29,10 +29,19 @@
     <!-- second part -->
     <div id="now">Two days ago, my dad sent me a video of cops violently arresting students at encampments across the
         US.<br><br></div>
+    <div id="album">
+        <div id="photos2"></div>
+        <div id="caption2"></div>
+    </div>
+
+    <!-- third part -->
+    <iframe id="vimeo" class="centered-hidden" src="https://player.vimeo.com/video/130921402" width="640" height="360"
+        frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <marquee id="background" class="centered-hidden" scrollamount="3"></marquee>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="main.js"></script>
 </body>
 

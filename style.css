@@ -53,25 +53,36 @@ h2 {
     visibility: hidden;
 }
 
-#stack {
+#stack,
+#album {
     position: absolute;
     right: 0;
-    bottom: 5vh;
-    width: 45svw;
+    width: 45vw;
     height: 50vh;
     visibility: hidden;
     pointer-events: none;
 }
 
-#caption {
-    position: absolute;
+#stack {
     bottom: 5vh;
-    width: 90%;
-    margin: auto;
+}
+
+#album {
+    bottom: 30vh;
+}
+
+#caption,
+#caption2 {
+    position: absolute;
+    width: 80%;
+    right: 10%;
+    bottom: 0;
+    margin: 0;
     text-align: right;
 }
 
-.tam {
+.tam,
+.college {
     position: absolute;
     max-width: 35vw;
     max-height: 35vh;
@@ -85,5 +96,21 @@ h2 {
     max-width: 25vw;
     left: 12vw;
     bottom: 20vh;
+    visibility: hidden;
+}
+
+#vimeo {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+}
+
+#background {
+    top: 80%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
     visibility: hidden;
 }
