@@ -89,6 +89,8 @@ function addPhotos(id, photoId, map, cssClass) {
 }
 
 $(document).ready(function () {
+    alert("🍉 please enable pop up windows—best viewed in chrome 🍉");
+
     $.get('background.txt', function (data) {
         $('#background').html(data);
     }).fail(function (error) {
