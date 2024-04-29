@@ -42,15 +42,12 @@ function randomNum(min, max) {
 function story(arr, id) {
     $(document).off('click', story);
 
-    if (cc === arr.length - 2) {
+    if (cc === arr.length) {
+        cc = 0;
         if (scene < 2) addPhotos(...Object.values(settings[scene++]));
         else if (scene === 2) {
             window.open(`readings.html`, '_blank', `popup,location,status,scrollbars,resizable,alwaysRaised,width=1000,height=450,top=100,left=200`);
         }
-    }
-
-    if (cc === arr.length) {
-        cc = 0;
     } else {
         let div = $(`#${id}`);
         let text = $('<span>').hide().html(arr[cc++]);
