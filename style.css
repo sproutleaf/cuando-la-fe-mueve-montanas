@@ -16,6 +16,13 @@ h2 {
     font-weight: normal;
 }
 
+.centered-hidden {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+}
+
 #begin,
 #dig {
     position: absolute;
@@ -26,6 +33,8 @@ h2 {
     top: 50%;
     left: 50%;
     text-align: center;
+    visibility: visible;
+    /* Override to make visible */
 }
 
 #dig {
@@ -35,6 +44,8 @@ h2 {
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: -1;
+    visibility: visible;
+    /* Override to make visible */
 }
 
 #begin:hover {
@@ -101,16 +112,8 @@ h2 {
 
 #vimeo {
     top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    visibility: hidden;
 }
 
 #background {
     top: 80%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    visibility: hidden;
 }
